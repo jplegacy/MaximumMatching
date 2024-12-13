@@ -1,0 +1,35 @@
+% Author @ Kurtik Appadoo, IN-PROGRESS, Reviewer @ Janak Subedi, Due Date 11/11
+
+\subsection{Perfect Matching in d-Partite Graphs}
+Generating random d-partite graphs is a complex task, particularly for larger and more intricate graphs. This complexity introduces potential uncertainty regarding whether all solvers, including those using integer programming, share the same bug. To address this challenge, we opted to create perfect matching d-partite graphs to ensure the accuracy of the known maximum matching by constructing graphs where the maximum matching is guaranteed.
+
+A perfect matching in a graph is defined as a matching in which every vertex is connected by an edge, and no vertex is left unmatched. In the context of d-partite graphs, a perfect matching means that every partition in the graph has a set of edges connecting each vertex in one partition to a unique vertex in another partition. This ensures that the maximum matching is limited by the number of vertices in the smallest partition, as no matching can surpass this number.
+
+\subsubsection{Terminology Clarification}
+\begin{itemize}
+    \item Matching: A set of edges where no two edges share a vertex, meaning each vertex is connected at most once.
+    \item Perfect Matching: A matching that covers all vertices, so each vertex in the graph is included exactly once.
+    \item d-Partite Graph: A type of graph where vertices are divided into d distinct sets, and edges can only connect vertices from different sets.
+    \item Hyperedge: An edge that connects more than two vertices simultaneously, used to represent complex multi-way relationships.
+\end{itemize}
+
+\subsubsection{Generating Perfect Matching d-Partite Graphs}
+To generate a perfect matching in d-partite graphs, we follow a structured approach:
+\begin{enumerate}
+    \item Construct a graph with d partitions, each containing n vertices.
+    \item Create a perfect matching pattern by adding edges that connect each vertex in one partition to a unique vertex in another partition. This configuration guarantees a perfect matching and ensures that the maximum matching cannot exceed the number of vertices in the smallest partition.
+\end{enumerate}
+
+This method ensures the generated test cases for d-partite graphs have a known maximum matching, which simplifies validation. The known maximum matching is equal to the number of vertices in the smallest partition, making it easy to verify that the matching is correct.
+
+\subsubsection{Adding Complexity to Test Cases}
+To enhance these test cases, we introduce random hyperedges to the graph after establishing the perfect matching. This addition introduces complexity and noise that solvers must navigate, simulating real-world scenarios more accurately. The process remains efficient, as the known maximum matching remains n, which means the graph does not need to be solved anew. This approach allows for diverse test case generation while maintaining confidence in the accuracy of the known maximum matching.
+
+\subsubsection{Advantages of This Approach}
+\begin{itemize}
+    \item Ensures the maximum matching is known, facilitating straightforward verification.
+    \item Speeds up the testing process by eliminating the need for computationally intensive verification.
+    \item Allows the introduction of complexity through additional hyperedges, making tests more challenging for solvers.
+\end{itemize}
+
+By using this structured generation method, developers can create reliable test cases for d-partite graphs that verify solver performance under various conditions. This approach provides a foundation for robust testing while ensuring accuracy and efficiency.

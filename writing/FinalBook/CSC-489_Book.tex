@@ -1,0 +1,214 @@
+\documentclass[condensed]{union-cs-thesis}
+%DON'T ADD ANY PACKAGES HERE! ADD TO PACKAGES.STY
+\usepackage{packages}
+
+\title{The Maximum Matching Problem}
+\author{\includegraphics[width=0.75\linewidth]{images/cover.png}} 
+\date{\today}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{1}
+
+\authorLF{}
+\dept{Department of Computer Science}
+\advisor{Matthew Anderson}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\maketitle
+
+\input{preface}
+\newpage
+{\small
+\tableofcontents}
+\newpage
+
+\makepreamble
+
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+\label{sec:introduction}
+\input{Introduction/Introduction}
+
+\section{The Maximum Matching Problem}
+\label{sec:max_matching}
+\input{Introduction/MaxMatching}
+
+\section{Organization}
+\label{sec:organization}
+\input{Introduction/Organization}
+
+\chapter{Background}
+\label{sec:background}
+\input{Background/Background}
+
+\section{Graph Theory}
+\label{sec:graph_theory}
+\input{Background/GraphTheory}
+
+\section{P vs. NP}
+\label{sec:P_vs_NP}
+\input{Background/PandNP}
+
+\chapter{Existing Algorithms}
+\label{sec:existing_algorithms}
+
+\section{Bipartite Graph Algorithms}
+\label{sec:bipartite_algorithms}
+
+\subsection{Ford-Fulkerson}
+\label{subsec:ford_fulkerson}
+\input{algorithms/ford_fulkerson}
+
+\subsection{Hungarian Algorithm}
+\label{subsec:hungarian}
+\input{algorithms/hungarian}
+
+\subsection{Dinic's Algorithm}
+\label{subsec:dinics}
+\input{algorithms/dinic}
+
+\subsection{Edmonds-Karp}
+\label{subsec:edmonds_karp}
+\input{algorithms/edmonds-karp}
+
+\subsection{Hopcroft-Karp}
+\label{subsec:hopcroft_karp}
+\input{algorithms/hopcroft_karp}
+
+\subsection{Bipartite Perfect Matching}
+\input{algorithms/perfect_match}
+
+\section{D-Partite Graph Algorithms}
+\label{sec:dpartite_algorithms}
+
+\subsection{Brute-Force}
+\label{subsec:brute_force}
+\input{algorithms/brute-force}
+
+\subsection{Ant Colony Optimization (ACO)}
+\label{subsec:aco}
+\input{ACO}
+
+\subsection{Karp-Sipser}
+\label{subsec:karp_sipser}
+\input{algorithms/karp_sipser}
+
+\subsection{Auction Algorithm}
+\label{subsec:auction}
+\input{algorithms/auction}
+
+\subsection{A* Algorithm}
+\label{subsec:A_star}
+\input{A}
+
+\section{General Graph Algorithms}
+\label{sec:general_graph_algorithms}
+
+\subsection{Edmond's Blossom Algorithm}
+\label{subsec:edmonds_blossom}
+\input{algorithms/edmonds_blossom}
+
+\section{Approximation Algorithms}
+\label{sec:approximation_algorithms}
+\input{Approximation}
+
+\section{Other Algorithms}
+\label{sec:other_algorithms}
+
+\subsection{Greedy Matching Algorithm}
+\label{subsec:greedy_matching}
+\input{algorithms/greedy}
+
+\subsection{Maximum Matchings through Randomization}
+\label{subsec:randomization}
+\input{algorithms/randomization}
+
+\subsection{Algorithm for Maximum Matching in Directed Complex Networks}
+\label{subsec:directed_complex}
+\input{algorithms/directed_complex_networks}
+
+\section{Limitations of Existing Algorithms}
+\label{sec:limitations}
+\input{algorithms/limitations}
+
+\chapter{Related Problems}
+\label{sec:related}
+
+\section{Maximum Flow Problem}
+\label{sec:max_flow}
+\input{MaxFlow}
+
+\section{Perfect Matching Problem}
+\label{sec:perfect_matching}
+\input{PerfectMatching}
+
+\section{Linear Programming}
+\label{sec:linear_programming}
+\input{LP}
+
+\section{Integer Programming}
+\label{sec:integer_programming}
+\label{IP}
+\input{IntegerProgramming}
+
+\section{Independent Sets} \label{sec:IndSets}
+\input{IndependentSets}
+
+\section{Stable Marriage Problem (SMP)}
+\label{sec:smp}
+\input{smp}
+
+\section{Pairwise Kidney Exchange}
+\label{sec:kidney_exchange}
+
+\chapter{Testing and Evaluation}
+    \section{Testing Philosophy}
+    \input{testing_eval/testingPhilosophy}
+    \section{Verification of Test Solutions}
+        \input{testing_eval/DimensionRestriction}
+        \subsection{Automating the verification process}
+        \input{testing_eval/automatingVP}
+    \section{Test Generation}
+        \subsection{Testing File format}
+        \input{testing_eval/testFormat}
+        \subsection{Random Test Generation}
+        \input{testing_eval/randomTestGen}
+        \subsection{Test generation for pre-determined solutions}
+        \input{testing_eval/perfectMatching}
+    \section{Test Results \& Solver Perfromance}
+        \subsection{Courses and Races}
+        \input{Evaluation.tex}
+        \subsection{Performance Analysis}
+        \input{AlgoAnalysis.tex}
+\chapter{Applications}
+\label{sec:applications}
+\input{practicalApplications.tex}
+\chapter{Implementation}
+\label{sec:implementation}
+
+\input{Implementation}
+
+\section{Brute-Force}
+\input{BruteForce.tex}
+
+\section{Bipartite Graph}
+\label{sec:bipartite_graph_implementation}
+
+\input{implementation/EKimplement}
+\input{implementation/perfect_match_implement}
+
+\section{Parallel Programming}
+\input{implementation/ParallelProgramming}
+
+\chapter{Conclusion}
+\input{conclusion}
+
+
+\bibliographystyle{plainurl}
+\bibliography{thesis}
+
+\end{document}

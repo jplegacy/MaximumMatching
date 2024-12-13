@@ -1,0 +1,3 @@
+tests/d3/perfect_matching/*.mmi
+tests/d4/perfect_matching/*.mmi
+tests/d5/perfect_matching/*.mmi

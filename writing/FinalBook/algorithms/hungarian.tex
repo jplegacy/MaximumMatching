@@ -1,0 +1,43 @@
+% Author @ Ryan Feneley, IN-PROGRESS, Reviewer @ Ethan K, Due Date 11/19
+The Hungarian Algorithm, also known as the Kuhn-Munkres algorithm, is a combinatorial optimization method used for finding maximum matchings in bipartite graphs. This algorithm is particularly notable for its ability to efficiently solve the assignment problem, where the objective is to assign \( n \) workers to \( n \) jobs in such a way that minimizes the total cost or maximizes the total profit. The algorithm operates by constructing a perfect matching in a weighted bipartite graph through a series of augmenting paths.
+
+\paragraph{History}
+The Hungarian Algorithm was first introduced by Harold Kuhn in 1955 \cite{kuhn1955hungarian}, based on earlier work by Hungarian mathematicians Dénes Kőnig and Jenő Egerváry. The algorithm was later refined by James Munkres in 1957 \cite{munkres1957algorithms}, resulting in a more efficient implementation that became widely adopted. This refinement not only improved the algorithm's practical usability but also solidified its theoretical foundations. The algorithm’s name honors the Hungarian mathematicians whose ideas inspired Kuhn’s work, underscoring its deep roots in combinatorial optimization.
+
+\paragraph{Algorithm Overview}
+The Hungarian algorithm operates in polynomial time and is based on the principle of finding an optimal assignment for weighted bipartite graphs. It aims to maximize or minimize the total weight of the matching, depending on the problem context. The process can be summarized in the following key steps:
+\begin{enumerate}
+    \item Initialization: Construct an initial feasible solution by subtracting the smallest value in each row and column of the cost matrix. This step simplifies the problem by ensuring that zero-cost entries exist in the matrix.
+    \item Labeling and Reduction: Identify unmatched rows and columns, then adjust the labels to maintain feasibility. This involves modifying the cost matrix to preserve zeros while ensuring that the solution remains optimal.
+    \item Finding Augmenting Paths: Construct alternating paths to update the current matching. Augmenting paths are sequences of alternating matched and unmatched edges, which are used to improve the matching incrementally.
+    \item Iterative Refinement: Repeat the labeling and augmentation steps until a perfect matching is achieved. The final matching will minimize (or maximize) the total cost, depending on the objective.
+\end{enumerate}
+
+The algorithm maintains a feasible solution throughout its execution, ensuring that each step incrementally improves the matching. By systematically adjusting the labels and augmenting the matching, it guarantees an optimal solution.
+
+\paragraph{Performance and Time Complexity}
+The Hungarian algorithm runs in \(O(n^3)\) time, where \(n\) is the number of vertices in the bipartite graph. While this time complexity is polynomial, it can become computationally expensive for very large graphs. For instance, in real-time or large-scale applications with millions of vertices, alternative methods like auction algorithms or push-relabel methods may offer better scalability. Nevertheless, for moderate-sized problems, the Hungarian algorithm remains a reliable and practical choice.
+
+Recent advancements have sought to reduce the computational overhead of the Hungarian algorithm. Variants that exploit sparsity in the cost matrix or incorporate parallel computing have been proposed, further expanding its applicability to larger datasets.
+
+\paragraph{Applications}
+The Hungarian algorithm has widespread applications across numerous domains:
+\begin{itemize}
+    \item Assignment Problems: Its most well-known application is in job assignment problems, where the algorithm determines the most efficient allocation of workers to tasks based on individual costs or efficiencies.
+    \item Resource Allocation: The algorithm is used in logistics to optimize the distribution of goods or resources, such as matching trucks to delivery routes or allocating materials to production lines.
+    \item Transportation Problems: In transportation networks, the Hungarian algorithm can optimize route planning by minimizing travel costs or time.
+    \item Network Design: It finds use in computer networks to assign resources like bandwidth or servers to clients efficiently.
+    \item Education and Scheduling: The algorithm has been applied to allocate classrooms, teachers, and resources in educational settings.
+    \item Biological Research: In bioinformatics, it is used for problems such as protein-protein interaction matching or DNA sequencing alignment.
+\end{itemize}
+
+\paragraph{Advantages and Limitations}
+The Hungarian algorithm is prized for its ability to guarantee an optimal solution for assignment problems in bipartite graphs. Unlike heuristic or approximation methods, it provides exact results, making it ideal for applications where precision is critical. Additionally, its systematic approach to augmenting paths and maintaining feasibility ensures robustness.
+
+However, the \(O(n^3)\) time complexity makes it less suitable for extremely large graphs or real-time applications. In such cases, approximate or heuristic methods like the auction algorithm may be more practical. Additionally, the algorithm is tailored for bipartite graphs, meaning it cannot directly address non-bipartite or hypergraph matching problems without significant modifications.
+
+\paragraph{Further Impact}
+The Hungarian algorithm's development marked a significant milestone in the study of maximum matchings and laid the groundwork for subsequent advancements in matching theory. The algorithm's ability to handle weighted bipartite graphs inspired the creation of related methods for non-bipartite graphs, such as Edmonds' Blossom algorithm \cite{edmonds1965paths}.
+
+\paragraph{Summary}
+The Hungarian algorithm remains a foundational method in combinatorial optimization. Its capacity to deliver exact solutions for bipartite matching problems has ensured its continued relevance in diverse fields, including operations research, logistics, computer science, and biology. Despite its computational limitations for large-scale graphs, it remains an essential tool for solving assignment problems, showcasing the enduring value of foundational algorithms in modern applications.

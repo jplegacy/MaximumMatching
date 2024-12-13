@@ -1,0 +1,100 @@
+% Author @ Jeremy Perez, UNDER-REVIEW, Reviewer @ Claudia Porto
+
+\textbf{Approximation algorithms} are algorithms that return solutions that are \textit{near-optimal}. As the name implies, these algorithms generate solutions that are 
+"close enough" to the correct answers. They prove to be quite useful when finding exact solutions are impractical, as in most large cases for NP-Hard problems. These algorithms prove to be quite effective at solving problems like
+the \textit{minimum vertex cover} and the \textit{knapsack problem } but prove to be impossible to implement for problems like the \textit{maximum clique problem}, despite all of these problems being in the class of NP-hard problems.
+
+\subsubsection{Approximation Ratios}
+
+Suppose we are working on an optimization problem whose solutions are only positive values. Now suppose we are considering some approximation algorithm. 
+\begin{itemize}
+    \item If the problem is a \textbf{minimization problem}, our approximation algorithm's solution $S$ will be larger than the actual solution $S^*$ and so $S\geq S^*$. If for some reason our algorithm is giving smaller values than the minimal real solution this implies that the algorithm is failing to consider the constraints at hand.
+    \item Similarly, if the problem was a \textbf{maximization problem}, our approximation algorithm's solution $S$ will be smaller than the actual solution $S^*$ and so in this case $S\leq S^*$
+\end{itemize}
+
+\noindent For some input of size $n$, an algorithm is said to have an \textbf{approximation ratio} of $\alpha(n)$ if the value of the solution is within a factor of $\alpha(n)$ of an optimal solution. Thus satisfying the following:
+\[\max(\frac{S}{S^*},\frac{S^*}{S} ) \leq \alpha(n)\]
+
+\noindent Notice that in a minimization problem, the ratio $\frac{S}{S^*}$ will be greater than 1. The usage of the $\max$ in this inequality ensures that 
+regardless of what type of optimization problem it is, the notion of
+closeness to the correct solution is the same. If the algorithm attains an approximation ratio of $\alpha(n)$ then it is classified as an \textbf{$\alpha(n)$-approximation algorithm}. To give an example, a $2$-approximation algorithm for a maximization problem ensures that the answer returned is at least half of the actual answer. Notice that if an approximation algorithm has an approximation ratio of 1, it is an algorithm that ensures the optimal answer and the approximate answer are 1 to 1, thus achieving an optimal algorithm.
+
+
+\subsubsection{Approximation Schemes}
+
+As constant approximation schemes prove to be too constraining, there also exist scalable renditions to this. An \textbf{approximation scheme} is an approximation algorithm that in addition to taking the problem input, also takes a value $\epsilon >0$, such that for any fixed $\epsilon$ it becomes a $(1+\epsilon)$-approximation algorithm.
+
+
+\subsubsection{$(1-\epsilon)$ Assadi's General Approximate Maximum Weighted Matching Algorithm}
+
+\noindent Assadi\cite{assadi} formulated an approximate algorithm relying on the dual relationship between maximum matching and vertex covers with additional clever sampling techniques. His approximately solves the maximum weighted matching problem for general graphs. The algorithm achieves an approximation ratio of $(1-\epsilon)$ for some $\epsilon \in (0,1)$. Thus if $\epsilon =0.1$ the algorithm guarantees a solution that is at least $90\%$ of the correct answer. loser to $0$ is better. 
+
+
+\begin{algorithm}
+\caption{Assadi's Sample and Solve Approximate MWM Algorithm}
+
+\textbf{Input:} A (general) graph \( G = (V, E) \) with weights \( w : E \to \mathbb{N} \) and parameter \( \epsilon \in (0, 1) \). \\
+\textbf{Output:} A \( (1 - \epsilon) \)-approximate maximum weight matching in \( G \).
+
+\begin{algorithmic}[1]
+\STATE $q_e^{(1)}\gets 1 $  for each $ e\in E$
+\STATE $Q^{(1)} := \sum_{e\in E} w(e)\cdot q_e^{(1)}$
+\STATE $W := \sum_{e\in E} w(e)$
+\STATE $R := \frac{4}{\epsilon}\cdot \log{W}$
+\FOR{$r \gets 1$ to $R$}                    
+    \STATE Sample each edge $e\in E$ with probability:
+    $p_e^{(r)} := \frac{8n\cdot \ln(nW)}{\epsilon} \cdot \frac{q^{(r)}_e \cdot w(e)}{Q^{(r)}} $
+    \STATE On the sample, using the original weights, calculate the maximum weight matching $M^{(r)}$ and minimum odd set cover solution $(y^{(r)}, z^{(r)})$
+    \STATE For any edge $e\in E$ that was not covered in the solution of MOSC, double its current importance for the next iteration importance
+    \STATE $Q^{r+1} = \sum_{e\in E}q_e^{r+1}$
+
+\ENDFOR
+\RETURN{ largest $M^{(r)}$ for $r\in[1,R]$} 
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection*{Explanation}
+
+Wholistically, this algorithm works by strategically assigning a weighted \textit{importance} to each edge and sampling edges upon that consensus to form a set of smaller problems which will take less computational time to solve than solving the entire problem.
+
+Going line by line, line 1-4 is delegated to initialization.
+Line 1 initializes all edges' importance to 1 for the initial iteration. Line 2 calculates the normalized sum of the importance of each edge. 
+This is done by factoring in the weight of each edge with respect to the current importance of 1. Line 3 calculates the total sum of all weights. Line 4 calculates the iteration bound. Line 5 through 9 is where the algorithm finds potential solutions to the problem. Line 6 is where each edge is sampled with a probability of $p_e^{(r)}$. 
+In the calculation, the first term scales based on the number of vertices in the graph. Additionally in this term, $\epsilon$ is integrated in the denominator where it scale inversely.
+As $\epsilon$ gets smaller this probability rapidly gets larger. The second term provides a normalized weight such that important edges have a higher chance of being sampled. 
+Line 7 solves for the Max Weighted Matching and Minimum Odd set cover of the subproblem. This solution heavily relies on Duality relationship between these problems. To understand this more, refer to the Duality Section.
+Line 8 is where the algorithm covers it's ground and accounts for solutions potentially not consider in the first estimation of the problem. Line 9 just calculates the total importance of the next iteration. 
+
+\subsubsection{Hurken-Schrijver's $(\frac{k}{2}-\epsilon)$ K-Set Packing Algorithm}
+Another example of a approximation algorithm is Hurken-Schrijver's algorithm \cite{Hurkens1989OnTS} which approximately solves the K-Set Packing problem. This algorithm can be utilized via a small reduction, which can lead to a proper maximum matching approximation algorithm. In the formulation of this algorithm, they approximate the largest \textbf{packing} which represents any collection of pairwise disjoint sets by iterative replacing a subset of the packing with a slightly bigger set until there are no more ways to do so. The solution of the algorithm is given in terms of satisfying the following property:
+
+\begin{idea}
+    For each $p\leq s$ the union of any $p+1$ pairwise disjoint sets among $X_1,...,X_1$ intersects at least $p+1$ sets in the solution
+\end{idea}
+
+\begin{algorithm}
+\caption{Hurken-Schrijver's Algorithm}
+\label{alg:heuristic_packing}
+ \textbf{Input:} Collection of sets \( X_1, X_2, \dots, X_q \) of \( k \)-sets and some $s\in (1,q)$\\
+ \textbf{Output:} A collection \( Y_1, Y_2, \dots, Y_m \) of pairwise disjoint sets that satisfy (1)
+\begin{algorithmic}[1]
+
+
+\STATE Initialize an empty packing \( Y = \emptyset \)
+\WHILE{there exists a way to increase the packing size}
+    \STATE Select a packing \( Y_1, Y_2, \dots, Y_n \) from \( X_1, X_2, \dots, X_q \)
+    \STATE Select up to \( p \leq s \) sets among \( Y_1, Y_2, \dots, Y_n \)
+    \STATE Replace the selected \( p \) sets by \( p+1 \) new sets from \( X_1, X_2, \dots, X_q \), maintaining pairwise disjointness
+    \STATE Update the packing \( Y_1, Y_2, \dots, Y_{n+p} \) to be the new collection
+\ENDWHILE
+
+\RETURN \( Y_1, Y_2, \dots, Y_m \)
+\end{algorithmic}
+\end{algorithm}
+
+\noindent One thing quite peculiar about this algorithm is that, this was formulated before a lot of the useful terminology like approximate ratio and approximate schemes. This can be noticed by the parameter $S$ acting like an $\epsilon$ where increasing it's value makes the algorithm substantially slower. 
+
+\subsubsection*{Explanation}
+The HS algorithm is another fairly simple algorithm that works by 
+finding some packing and 
+repeatedly replacing subsets of the packing with a slightly bigger packing until it is unable to do so. It approximates the answer by checking all possible subsets with $s$ or less elements. 

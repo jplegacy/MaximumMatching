@@ -1,0 +1,54 @@
+% Author @ Ryan Feneley, IN-PROGRESS, Reviewer @ Ethan K, Due Date 11/19
+
+The Hopcroft-Karp Algorithm, introduced by John Hopcroft and Richard Karp in 1973, is a foundational algorithm for finding the maximum matching in bipartite graphs. By incorporating an innovative multi-phase approach, the algorithm significantly improved upon earlier methods, such as the Ford-Fulkerson algorithm \cite{ford1956flows}, which only found a single augmenting path per iteration. The Hopcroft-Karp algorithm’s ability to process multiple augmenting paths in parallel not only improved efficiency but also established it as one of the most widely used algorithms for bipartite matching. 
+
+\paragraph{Historical Context}
+Before the Hopcroft-Karp Algorithm, most methods for finding maximum matchings in bipartite graphs relied on augmenting path-based strategies, such as those in the Ford-Fulkerson algorithm. However, these approaches suffered from inefficiencies, especially in large, sparse graphs. Hopcroft and Karp addressed this challenge by introducing a BFS-DFS hybrid strategy, which optimized the discovery and utilization of augmenting paths. Their work not only advanced the study of bipartite matching but also inspired subsequent research into graph algorithms and network optimization.
+
+\paragraph{Algorithm Overview}
+The Hopcroft-Karp Algorithm operates by alternating between two main phases, leveraging the concepts of graphs and augmenting paths:
+
+\begin{itemize}
+    \item \textbf{Phase 1: Breadth-First Search (BFS)}:
+    The algorithm begins by constructing a level graph using BFS. This involves grouping vertices by their distance from unmatched vertices in the current matching. The BFS ensures that the algorithm focuses on the shortest augmenting paths, which are critical for improving the matching efficiently. Each layer of the graph corresponds to vertices that can be reached via alternating paths of increasing lengths.
+
+    \item \textbf{Phase 2: Depth-First Search (DFS)}:
+    After the level graph is constructed, the algorithm employs DFS to discover all augmenting paths in the graph. Unlike earlier approaches that find and process a single path at a time, the Hopcroft-Karp algorithm finds and processes multiple disjoint augmenting paths simultaneously. Once these paths are identified, the edges along them are flipped, incrementally increasing the size of the matching.
+\end{itemize}
+
+This two-phase process—constructing the level graph followed by finding disjoint augmenting paths—repeats iteratively until no more augmenting paths can be found. At this point, the current matching is guaranteed to be maximum due to the absence of any further augmenting paths, as described by Berge's theorem \cite{berge1957two}.
+
+\paragraph{Performance and Time Complexity}
+The Hopcroft-Karp algorithm achieves a time complexity of \(O(\sqrt{V}E)\), where \(V\) is the number of vertices and \(E\) is the number of edges. This represents a significant improvement over the \(O(VE)\) complexity of the Ford-Fulkerson algorithm \cite{ford1956flows}. The reduction in complexity is primarily due to the algorithm's ability to process multiple augmenting paths in a single iteration, minimizing the number of expensive BFS and DFS traversals.
+
+This improvement is particularly impactful in large, sparse graphs, where the number of edges \(E\) is much smaller than the square of the number of vertices \(V\). The algorithm’s efficiency makes it a practical choice for solving large-scale bipartite matching problems in real-world applications.
+
+\paragraph{Applications}
+The Hopcroft-Karp algorithm has been applied extensively in various domains due to its reliability and efficiency:
+\begin{itemize}
+    \item Job Assignment Problems:
+    In scenarios where workers must be assigned to jobs based on cost or efficiency, the Hopcroft-Karp algorithm provides an optimal solution by maximizing the number of matched pairs.
+    
+    \item Network Flows:
+    The algorithm is used in network flow problems, particularly in constructing maximum flows in bipartite networks.
+    
+    \item Data Matching:
+    It can aid in linking records and data deduplication, where the goal is to find the best match between two datasets.
+    
+    \item Pairing:
+    The algorithm is employed in scheduling tasks in bipartite structures, such as pairing machines to tasks or classrooms to teachers.
+    
+    \item Graph Analytics:
+    In social network analysis, the algorithm identifies meaningful relationships in bipartite structures, such as connections between users and items.
+\end{itemize}
+
+\paragraph{Strengths and Limitations}
+The Hopcroft-Karp algorithm is particularly well-suited for problems involving bipartite graphs due to its efficient handling of augmenting paths. Its ability to process multiple paths in parallel significantly reduces computational overhead in sparse graphs, making it a preferred choice for large-scale applications.
+
+However, the algorithm is limited to bipartite graphs and cannot directly address matching problems in general (non-bipartite) graphs. For such cases, algorithms like Edmonds' Blossom Algorithm \cite{edmonds1965paths} are necessary. Furthermore, while the \(O(\sqrt{V}E)\) complexity is efficient, there are more modern algorithms tailored for specific problem instances, such as very dense or weighted graphs, that may outperform Hopcroft-Karp in practice.
+
+\paragraph{Theoretical Impact}
+The Hopcroft-Karp algorithm not only advanced the study of graph matching but also demonstrated the power of hybrid search strategies in graph algorithms. Its introduction of the BFS-DFS combination as a core methodology inspired subsequent work in graph theory, network flow algorithms, connectivity, and traversal.
+
+\paragraph{Summary}
+The Hopcroft-Karp algorithm is fundamental in the study of bipartite graph matching. Its efficient handling of augmenting paths, combined with its applicability to a wide range of practical problems, ensures its continued relevance in both theoretical research and real-world applications. Despite its limitations in addressing non-bipartite graphs, its efficiency and robustness make it one of the most significant advancements in graph algorithm design, and it remains to this day the standard for bupartite matchings.

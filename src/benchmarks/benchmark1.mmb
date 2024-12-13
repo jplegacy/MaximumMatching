@@ -1,0 +1,3 @@
+tests/test*.mmi
+tests/d2/*.mmi
+tests/d2/*/*.mmi

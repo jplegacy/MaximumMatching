@@ -1,0 +1,31 @@
+% Author @ Kurtik Appadoo, IN-PROGRESS, Reviewer @ Janak Subedi, Due Date 11/11
+\subsubsection{Random Bipartite Graph Testing Suite}
+Automating the generation of random bipartite graphs with a known maximum matching involves two main steps: generating the graph and solving it to verify the maximum matching. 
+
+\paragraph{Challenge of Solver Validation}
+Determining whether the algorithm used for solving the graph is correct can be challenging. This is because if the verification algorithm itself has flaws, it may lead to false results. To address this, we rely on algorithms that have been well-established and peer-reviewed. Additionally, backtracking algorithms, which explore all possible configurations, are often employed as they ensure correctness by checking every potential solution.
+
+\paragraph{Approach to Generating Test Cases}
+For bipartite graphs, the test generation process is simpler compared to d-partite graphs. We create two partitions, each containing n vertices, and add random edges connecting vertices from one partition to another. A random number m is generated to represent the number of edges, after which random edges are added by selecting vertices from each partition. The Graph Abstract Data Type (ADT) implementation handles duplicate edge prevention, ensuring that no repeated edges are introduced.
+
+\paragraph{Solver Used for Verification}
+To find the maximum matching in the randomly generated bipartite graphs, we used the maximum matching module from NetworkX, which is based on the well-known Hopcroft-Karp algorithm. This algorithm efficiently finds the maximum matching in bipartite graphs and is widely tested and reliable. It runs in $O(\sqrt{V}E)$ time, making it suitable for use in various applications and for verifying the test cases generated.
+
+\subsubsection{Random D-Partite Graph Testing Suite}
+Generating random graphs with a known maximum matching for d-partite graphs is more complex than for bipartite graphs due to several factors:
+
+\begin{itemize}
+    \item \textbf{Hyperedges instead of single edges}: In d-partite graphs, we work with hyperedges, which connect multiple vertices across partitions. This requires ensuring that no hyperedge or single edge duplicates exist, necessitating a data structure to track edges and prevent duplication.
+    \item \textbf{Absence of polynomial-time algorithms}: Solving the maximum matching problem in d-partite graphs is NP-Hard. No known polynomial-time algorithms exist for this problem, making the task of generating test cases and verifying solutions more challenging.
+\end{itemize}
+
+\paragraph{Approach to Generating Random D-Partite Test Cases}
+To generate d-partite test cases, we create a random graph with d partitions, each containing n vertices, and add hyperedges. Each hyperedge must be validated to avoid duplicate single edges or hyperedges. This validation is managed using a data structure that records all edges added to the graph. Although this introduces additional computational overhead due to search operations for every new edge, it ensures the generated test cases maintain their validity.
+
+\paragraph{Solver Used for Verification}
+Once the graph is generated, we need to solve it using a trusted solver. For d-partite graphs, where no polynomial-time algorithms exist, we initially used a brute-force algorithm. This algorithm, employing backtracking, guarantees the correctness of the maximum matching by checking all possible solutions.
+
+\paragraph{Switch to Integer Programming Solver}
+While the brute-force method ensures correctness, it is inefficient for larger graphs. To enhance the test generation process, we transitioned to an Integer Programming (IP) solver for solving d-partite graphs. This approach offered faster runtimes, enabling us to solve larger graphs within reasonable timeframes. The use of the IP solver allowed us to generate more extensive test cases and test additional solvers efficiently.
+
+However, a limitation persists: if the IP solver and the solvers being tested share the same flaw, it may go undetected. This is an inherent limitation of the testing process and must be considered when interpreting the results of solver evaluations.

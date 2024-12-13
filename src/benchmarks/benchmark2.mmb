@@ -1,0 +1,6 @@
+tests/d3/*/*.mmi
+tests/d3/*.mmi
+tests/d4/*/*.mmi
+tests/d4/*.mmi
+tests/d5/*/*.mmi
+tests/d5/*.mmi

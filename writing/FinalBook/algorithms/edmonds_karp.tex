@@ -1,0 +1,23 @@
+% Author @ Vinh, IN-PROGRESS, Reviewer @ Kurtik, Due Date 11/11
+
+\subsubsection*{Edmonds-Karp Algorithm (1972)}
+
+The Edmonds-Karp Algorithm, introduced by Jack Edmonds and Richard Karp in 1972, is an important refinement of the Ford-Fulkerson method for computing the maximum flow in a flow network. The Edmonds-Karp algorithm provides a predictable polynomial time complexity by implementing a breadth-first search (BFS) to select the shortest augmenting paths in terms of edge count.
+
+\textbf{Algorithm Overview}
+
+The Edmonds-Karp approach extends Ford-Fulkerson by guaranteeing that any augmenting path from source to sink is the shortest one possible. The algorithm begins by initializing all edges with no flow. While there is a path from the source to the sink in the residual graph, the algorithm continuously seeks and improves the shortest path. It uses a breadth-first search (BFS) to find the shortest path between the source and the sink, as well as the smallest residual capacity along that path. The flow along this path is afterward increased by the minimum capacity, which augments the network flow. Finally, the residual capacities of the edges and their reverse edges are modified to reflect the new flow, ensuring that the algorithm moves on to the next augmentation. This also helps to avoid any non-termination issues that might occur in Ford-Fulkerson with irrational capacity.
+
+\textbf{Performance and Time Complexity}
+
+The time complexity of the Edmonds-Karp algorithm is \(O(VE^2)\), where \(V\) is the number of vertices and \(E\) is the number of edges in the network. This is achieved because, in each augmenting step, the BFS finds the shortest path in \(O(E)\), and the algorithm iterates up to \(O(VE)\) times in total. Compared to the potentially exponential time complexity of Ford-Fulkerson when paths are chosen arbitrarily, Edmonds-Karp provides a predictable polynomial bound~\cite{edmonds_karp}.
+
+For bipartite matching problems, this approach transforms the matching problem into a maximum flow problem, where vertices are divided into a source, sink, and two partitions representing the bipartition. By directing edges from the source to one partition, across to the other, and then to the sink, the Edmonds-Karp algorithm can be applied to find maximum matchings in bipartite graphs~\cite{ahuja}.
+
+\textbf{Applications and Limitations}
+
+The Edmonds-Karp algorithm is often used to solve network flow problems that require a certain polynomial time solution. In the context of bipartite matching, the algorithm is a more efficient alternative to the Ford-Fulkerson method, offering a solution with a polynomial run time.
+
+For specialized matching problems, such as bipartite matching, the Hopcroft-Karp algorithm frequently gives a more efficient solution with a lower time complexity of \(O(\sqrt{V} E)\). Furthermore, the Edmonds-Karp algorithm's \(O(VE^2)\) complexity might become expensive in dense graphs with a high number of edges. While the method guarantees polynomial time in general situations, other specialized algorithms, such as Dinic's algorithm, may outperform Edmonds-Karp in specific network architectures.
+
+Overall, the Edmonds-Karp algorithm is nonetheless an important component of the study of network flows.

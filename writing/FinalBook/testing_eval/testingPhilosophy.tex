@@ -1,0 +1,21 @@
+% Author @ Sam Appleton, IN_PROGRESS, REVIEWER @ Jeremy Perez, Due Date 11/11
+\subsection{Testing and Evaluation Philosophy}
+We have two goals for our testing suite: determining accuracy, and evaluating
+efficiency. We want our implementation of Maximum Matching solvers to be as 
+accurate and efficient as possible. In terms of accuracy, we need a wide 
+variety of graphs with known maximum matchings. This allows us to check each
+result from a solver against the known maximum matching. These suites of tests
+let us be confident in the accuracy of our solvers, as more tests with different
+criteria increase our confidence in each solver. For bipartite solvers, we use 
+a basic testing suite of approximately 50 different graph instances. Each instance 
+has randomly assigned edges, meaning that edge cases are more likely to occur.
+
+These suites of tests also let us test for efficiency. We use our benchmarking 
+tools in Section \ref{BenchmarkingSummary} to compare wall-clock time of our suite
+of solvers in Section \ref{SolverSummary}. However, a single suite of tests does 
+not give us much information about the advantages of certain algorithms. We reason
+that some algorithms may excel on different types of graphs, such as dense graphs, 
+spare graphs, or near perfect graphs. We create several suites of tests to address
+each of these types of graphs. After running each suite with each solver, we can 
+make reasonable conclusions about the strengths of each algorithm and our 
+implementation of it.

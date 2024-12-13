@@ -1,0 +1,54 @@
+\ProvidesPackage{packages}
+%ONLY ADD PACKAGES HERE PLEASE!!!!
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usetikzlibrary{topaths, calc, chains, positioning}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{cite} % Required for citations
+\usepackage{graphicx}
+\usepackage[noend]{algorithmic}
+\usepackage[letterpaper,bindingoffset=\bindingOffset,%
+  left=1in,right=1in,top=1in,bottom=1in,%
+  footskip=.25in]{geometry}
+\usepackage[toc,page]{appendix}
+\usepackage{subcaption}
+\usepackage{clrscode3e}
+\usetikzlibrary{positioning, arrows.meta}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\newsavebox\ideabox
+\newenvironment{idea}
+  {\begin{equation}
+   \begin{lrbox}{\ideabox}
+   \begin{minipage}{\dimexpr\columnwidth-2\leftmargini}
+   \setlength{\leftmargini}{0pt}%
+   \begin{quote}}
+  {\end{quote}
+   \end{minipage}
+   \end{lrbox}\makebox[0pt]{\usebox{\ideabox}}
+   \end{equation}}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{scholium}[theorem]{Scholium}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newtheorem{construction}{Construction}

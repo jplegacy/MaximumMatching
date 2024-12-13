@@ -1,0 +1,29 @@
+% Author: Ryan Feneley, Reviewer: Ethan K, Due Date: 11/19
+\subsection*{Heuristic for Maximum Matching in Directed Complex Networks}
+
+In 2012, Ying and Wang introduced a heuristic for maximum matching specifically designed for directed complex networks. This approach departs from traditional matching algorithms, which primarily address undirected graphs. Instead, it targets the unique challenges posed by directed graphs, where the directionality of edges plays a crucial role in determining feasible matchings. The heuristic focuses on efficiently navigating these complexities to identify maximum matchings in a computationally feasible manner \cite{ying2012heuristic}.
+
+\paragraph{Algorithm Overview}
+The heuristic proposed by Ying and Wang employs an iterative refinement process to enhance matchings within directed networks. The main steps of the algorithm include:
+
+1. \textbf{Initial Matching Construction:} The algorithm begins by constructing an initial matching through a greedy approach, ensuring that the selected edges respect the directed nature of the graph. This step serves to establish a baseline matching from which further refinements can be made.
+
+2. \textbf{Iterative Refinement:} Following the initial matching, the algorithm iteratively examines unmatched vertices and identifies augmenting paths that can potentially increase the size of the matching. The refinement process incorporates specific criteria related to the directed edges, ensuring that the selected augmenting paths adhere to the graph's directionality.
+
+3. \textbf{Termination:} The algorithm terminates when no further augmenting paths can be found that improve the matching. At this point, the current matching is deemed to be maximal.
+
+\paragraph{Performance and Time Complexity}
+The time complexity of Ying and Wang's heuristic primarily depends on the size of the directed graph and the efficiency of the greedy selection and pathfinding processes. While the authors did not provide a formal complexity analysis, empirical evaluations indicate that the heuristic is efficient in practice, particularly for large-scale directed networks. The algorithm's performance benefits from its ability to quickly identify and exploit augmenting paths, which contributes to its competitive runtime compared to traditional methods.
+
+In specific applications, the heuristic has shown to perform well in achieving high-quality matchings within a fraction of the time required by exact algorithms, making it suitable for scenarios where speed is critical.
+
+\paragraph{Applications and Limitations}
+The heuristic for maximum matching in directed complex networks has found applications in various fields, including:
+
+- \textbf{Social Networks}: In social network analysis, where relationships can be inherently directional, this heuristic allows for efficient matching processes that reflect the complexities of social interactions.
+  
+- \textbf{Biological Networks}: In biological contexts, such as gene regulatory networks, where directionality can represent regulatory effects, the heuristic provides a valuable tool for identifying interactions among biological entities.
+
+Despite its strengths, the heuristic does have limitations. One major drawback is that it does not guarantee an optimal matching. While it performs well empirically, there are cases where the heuristic may converge to a suboptimal solution, particularly in highly complex networks. Moreover, the heuristic's reliance on initial greedy matching means that its performance can be sensitive to the starting conditions, which may lead to variability in outcomes across different instances.
+
+Overall, while the heuristic for maximum matching in directed complex networks provides an effective approach tailored for directed graphs, users should be mindful of its limitations and the potential need for validation against more rigorous exact algorithms in critical applications.
